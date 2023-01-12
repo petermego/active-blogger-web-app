@@ -17,6 +17,10 @@ module.exports = class User {
     ).catch(error => error + " on save");
   }
 
+  static findUserByEmail(email) {
+    return db.execute("SELECT email From user WHERE user.email = ?", [email]);
+  }
+
   static userCounter() {
     return db.execute("SELECT COUNT(*) FROM user")
       .catch(error => error + " on users counter");
