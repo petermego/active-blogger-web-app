@@ -1,9 +1,11 @@
 import { Fragment } from 'react';
 
-function App() {
-  return (
-    <Fragment >
+import Header from './components/ui/Header';
 
+const App = () => {
+  return (
+    <Fragment>
+      <Header />
     </Fragment>
   );
 }
