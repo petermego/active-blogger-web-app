@@ -3,9 +3,9 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
+const errorUndefiendController = require('./controllers/error-404');
 const signup = require('./routes/signup');
 
-app.use(express.json());
 app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -14,8 +14,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.json());
 app.use(cors());
 app.use(signup);
+app.use(errorUndefiendController.getUndefiend);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
