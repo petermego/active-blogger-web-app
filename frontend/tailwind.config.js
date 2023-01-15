@@ -9,9 +9,10 @@ module.exports = {
       xl: "1440px",
     },
     colors: {
-      green: "#16a34a",
+      blue: "#0284c7",
       neutral: "#fafafa",
-      black: "#171717",
+      dark: "#232848",
+      light: "#1e40af",
     },
     fontFamily: {
       sans: ["Graphik", "sans-serif"],
@@ -20,6 +21,7 @@ module.exports = {
     extend: {
       height: {
         "10vh": "10vh",
+        "90vh": "90vh",
       },
     },
   },

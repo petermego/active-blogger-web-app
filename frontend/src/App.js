@@ -1,13 +1,21 @@
-import { Fragment } from 'react';
+import { Fragment } from "react";
+import { Route, Routes } from "react-router-dom";
 
-import Header from './components/ui/Header';
+import Header from "./components/ui/Header";
+import SignUp from "./components/pages/Sign-up";
 
 const App = () => {
+
   return (
     <Fragment>
       <Header />
+      <main className="flex w-100% bg-dark h-90vh min-h-90vh">
+        <Routes>
+          <Route path="/sign-up" exact element={<SignUp />} />
+        </Routes>
+      </main>
     </Fragment>
   );
-}
+};
 
 export default App;
