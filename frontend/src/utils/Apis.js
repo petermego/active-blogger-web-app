@@ -1,11 +1,11 @@
 export const SignUpReq = async (fname, lname, username, email, password) => {
-  const body = await { fname, lname, username, email, password };
-  return await fetch("http://localhost:5000/sign-up", {
+  const body = { fname, lname, username, email, password };
+  return await fetch(process.env.REACT_APP_SIGN_UP, {
     method: "POST",
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
+      Accept: "application/json",
     },
   }).then((data) => data.json());
 };
@@ -17,7 +17,7 @@ export const SignInReq = async (email, password) => {
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
+      Accept: "application/json",
     },
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };
