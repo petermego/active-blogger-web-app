@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import { redirect } from 'react-router-dom';
+import { Fragment, useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 import './Sign-up.css';
 import Button from './../ui/Button'
@@ -11,10 +11,11 @@ const SignUp = () => {
   const uniqueNameRef = useRef('');
   const emailRef = useRef('');
   const passwordRef = useRef('');
+  const navigate = useNavigate();
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    const req = SignUpReq(
+    const req = await SignUpReq(
       firstNameRef.current.value, 
       lastNameRef.current.value,
       uniqueNameRef.current.value,
@@ -23,27 +24,31 @@ const SignUp = () => {
     );
     if (req.error) {
       console.log("error");
+      return;
     }
-    return redirect('/home');
+    return navigate('/home');
   };
 
   return (
-    <form className="flex center style" onSubmit={submitHandler}>
-      <div className=" name">
-        <input required type="text" ref={firstNameRef} name="fname" placeholder='Enter your first name...' />
-        <input required type="text" ref={lastNameRef} name="lname" placeholder='Enter your last name...' />
-      </div>
-      <div className='username input'>
-        <input required type="text" ref={uniqueNameRef} name="username" placeholder='Enter a unique name...' />
-      </div>
-      <div className='email input'>
-        <input required type="text" ref={emailRef} name="email" placeholder='Enter your E-mail...' />
-      </div>
-      <div className='password input'>
-        <input required type="text" ref={passwordRef} name="password" placeholder='Enter new password...' />
-      </div>
-      <Button type="input">Submit</Button>
-    </form>
+    <Fragment>
+      <form className="flex center style" onSubmit={submitHandler}>
+        <div className=" name">
+          <input required type="text" ref={firstNameRef} name="fname" placeholder='Enter your first name...' />
+          <input required type="text" ref={lastNameRef} name="lname" placeholder='Enter your last name...' />
+        </div>
+        <div className='username input'>
+          <input required type="text" ref={uniqueNameRef} name="username" placeholder='Enter a unique name...' />
+        </div>
+        <div className='email input'>
+          <input required type="text" ref={emailRef} name="email" placeholder='Enter your E-mail...' />
+        </div>
+        <div className='password input'>
+          <input required type="text" ref={passwordRef} name="password" placeholder='Enter new password...' />
+        </div>
+        <Button type="input">Submit</Button>
+      </form>
+      <Link className="register" to={"/sign-in"}>Sign in</Link>
+    </Fragment>
   );
 }
  

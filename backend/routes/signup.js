@@ -2,10 +2,6 @@ const { body } = require("express-validator");
 const router = require("express").Router();
 const signUpController = require('../controllers/signup');
 
-router.get("/sign-up", (req, res) => {
-  return res.status(200).json({ greeting: "hello" });
-});
-
 router.post(
   "/sign-up",
   [

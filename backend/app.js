@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const errorUndefiendController = require('./controllers/error-404');
 const signup = require('./routes/signup');
+const signin = require('./routes/login');
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -17,9 +18,10 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(cors());
 app.use(signup);
+app.use(signin);
 app.use(errorUndefiendController.getUndefiend);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`server is run in port: ${port}`);
 });

@@ -18,7 +18,7 @@ module.exports = class User {
   }
 
   static findUserByEmail(email) {
-    return db.execute("SELECT email From user WHERE user.email = ?", [email]);
+    return db.execute("SELECT * From user WHERE user.email = ?", [email]);
   }
 
   static userCounter() {
