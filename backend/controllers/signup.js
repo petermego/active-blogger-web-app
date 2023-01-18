@@ -9,23 +9,23 @@ exports.postUser = (req, res) => {
     let message = "invalid value at ";
     switch (validationErrors[0].param) {
       case "fname": {
-        message += " at first name.";
+        message += "first name.";
         break;
       }
       case "lname": {
-        message += " at last name.";
+        message += "last name.";
         break;
       }
       case "username": {
-        message += " at username.";
+        message += "username.";
         break;
       }
       case "email": {
-        message += " at email.";
+        message += "email.";
         break;
       }
       case "password": {
-        message += " at password.";
+        message += "password.";
         break;
       }
       default: {
