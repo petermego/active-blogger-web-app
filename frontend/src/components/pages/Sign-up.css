@@ -73,7 +73,7 @@ form div.input input {
 
 @media (max-width:480px) {
   form.style {
-    width: 15rem;
+    width: 22rem;
   }
   form div.name {
     flex-direction: column;

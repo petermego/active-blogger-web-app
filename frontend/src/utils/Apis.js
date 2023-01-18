@@ -5,7 +5,7 @@ export const SignUpReq = async (fname, lname, username, email, password) => {
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
-      Accept: "application/json",
+      "Accept": "application/json",
     },
   }).then((data) => data.json());
 };
@@ -17,7 +17,7 @@ export const SignInReq = async (email, password) => {
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
-      Accept: "application/json",
+      "Accept": "application/json",
     },
   }).then((res) => res.json());
 };

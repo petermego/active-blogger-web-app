@@ -1,22 +1,38 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useState } from "react";
 
 import Button from "../ui/Button";
 import './Sign-up.css';
 import { SignInReq } from "../../utils/Apis";
+import { Modal } from "../ui/Modal";
 
 const SignIn = () => {
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const navigation = useNavigate();
+  const [modalShow, setModalShow] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const req = await SignInReq(emailRef.current.value, passwordRef.current.value);
-    if (!req.error) {
-      return navigation("/home");
+    try {
+      const req = await SignInReq(emailRef.current.value, passwordRef.current.value);
+      if (!req.error) {
+        return navigation("/home");
+      }
+      setModalMessage(req.message);
+      setModalShow(true);
+      return;
+    } catch (error) {
+      setModalMessage(error);
+      setModalShow(true);
+      return;
     }
-    console.log("error");
+  };
+
+  const modalCloseHandler = () => {
+    setModalMessage("");
+    setModalShow(false);
   };
 
   const style = {
@@ -35,6 +51,7 @@ const SignIn = () => {
         <Button type="input">Login</Button>
       </form>
       <Link className="register" to={"/sign-up"}>Sign up</Link>
+      { modalShow && <Modal onClose={modalCloseHandler}>{modalMessage}</Modal> }
     </Fragment>
   );
 }

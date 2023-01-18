@@ -8,3 +8,12 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background: #232848;
 }
+
+button {
+  background-color: white;
+  color: #0284c7;
+  width: 10rem;
+  padding: 2px 0;
+  cursor: pointer;
+  border-radius: .6rem;
+}
