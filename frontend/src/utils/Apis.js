@@ -21,3 +21,14 @@ export const SignInReq = async (email, password) => {
     },
   }).then((res) => res.json());
 };
+
+export const isAuthReq = async (clientToken) => {
+  return await fetch(process.env.REACT_APP_AUTHORIZATION, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: "Bearer " + clientToken,
+    },
+  }).then((res) => [res.json(), res.status]);
+}

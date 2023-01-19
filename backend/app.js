@@ -6,6 +6,7 @@ const cors = require("cors");
 const errorUndefiendController = require('./controllers/error-404');
 const signup = require('./routes/signup');
 const signin = require('./routes/login');
+const { isAuth } = require("./middleware/isAuth");
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.use(cors());
+app.get('/auth', isAuth);
 app.use(signup);
 app.use(signin);
 app.use(errorUndefiendController.getUndefiend);

@@ -20,11 +20,10 @@ exports.getAccount = (req, res) => {
             if (doMatch) {
               const tokenSecret = process.env.JWT_TOKEN_SECRET;
               const token = jwt.sign({
-                email: row[0].email,
-                id: row[0].id
+                user: row[0]
               },
               tokenSecret,
-              {expiresIn: '30d'}
+              {expiresIn: '10s'}
               );
               return res.status(201).json({ error: false, token, user: row[0] });
             }
