@@ -26,7 +26,7 @@ const App = () => {
     } catch (error) {
       console.log(error.message);
     }
-  }, [dispatch]);
+  }, []);
 
   return (
     <Fragment>
