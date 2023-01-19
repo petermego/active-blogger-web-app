@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.getAccount = (req, res) => {
   const errors = validationResult(req);
@@ -17,7 +18,15 @@ exports.getAccount = (req, res) => {
         bcrypt.compare(password, row[0].password)
           .then(doMatch => {
             if (doMatch) {
-              return res.status(201).json({ error: false });
+              const tokenSecret = process.env.JWT_TOKEN_SECRET;
+              const token = jwt.sign({
+                email: row[0].email,
+                id: row[0].id
+              },
+              tokenSecret,
+              {expiresIn: '30d'}
+              );
+              return res.status(201).json({ error: false, token, user: row[0] });
             }
             return res.status(200).json({ error: true, message: "your email or password is not valid" });
           });
