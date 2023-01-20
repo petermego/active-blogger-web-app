@@ -1,17 +1,19 @@
 input[type="submit"] {
-  color: white;
-  padding: .6rem 6rem;
-  background: #1e40af;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: .3rem 6rem;
+  background: rgb(245, 197, 24);
   cursor: pointer;
 }
 
 input[type="submit"]:hover {
-  background: #232848;
+  background: rgb(179, 144, 18);
 }
 
 button {
-  background-color: white;
-  color: #0284c7;
+  background-color: black;
+  color: rgb(245, 197, 24);
   width: 10rem;
   padding: 2px 0;
   cursor: pointer;

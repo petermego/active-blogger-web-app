@@ -23,7 +23,7 @@ exports.getAccount = (req, res) => {
                 user: row[0]
               },
               tokenSecret,
-              {expiresIn: '10s'}
+              {expiresIn: '30d'}
               );
               return res.status(201).json({ error: false, token, user: row[0] });
             }

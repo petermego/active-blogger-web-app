@@ -1,6 +1,15 @@
 const { body } = require("express-validator");
 const router = require("express").Router();
 const signUpController = require('../controllers/signup');
+const rateLimit = require("express-rate-limit");
+
+const accountLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  message: 'Too many accounts created from this IP, please try again after an hour',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 router.post(
   "/sign-up",
@@ -11,6 +20,7 @@ router.post(
     body("email").trim().isEmail().normalizeEmail(),
     body("password").isLength({ min: 8 }),
   ],
+  accountLimiter,
   signUpController.postUser
 );
 

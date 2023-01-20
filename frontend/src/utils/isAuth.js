@@ -6,7 +6,7 @@ export const isAuth = async () => {
   const [response, resStatus] = await isAuthReq(clintToken);
   if (resStatus === 403) {
     localStorage.clear();
-    return 403;
+    return null;
   }
   if (resStatus === 401) {
     localStorage.clear();

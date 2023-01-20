@@ -2,6 +2,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const rateLimit = require("express-rate-limit");
 
 const errorUndefiendController = require('./controllers/error-404');
 const signup = require('./routes/signup');
@@ -16,8 +17,17 @@ app.use((req, res, next) => {
   next();
 });
 
+const apiLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 100,
+  message: 'Too many requests at short time.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 app.use(express.json());
 app.use(cors());
+app.use(apiLimiter)
 app.get('/auth', isAuth);
 app.use(signup);
 app.use(signin);

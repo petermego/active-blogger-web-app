@@ -7,9 +7,6 @@ exports.isAuth = (req, res) => {
 
   try {
     jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, decoded) => {
-      if (err) {
-        res.sendStatus(403);
-      }
       if (err) return res.sendStatus(403);
       res.status(200).json({ user: decoded.user });
     });

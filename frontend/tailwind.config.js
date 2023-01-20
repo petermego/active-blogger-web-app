@@ -13,6 +13,8 @@ module.exports = {
       neutral: "#fafafa",
       dark: "#232848",
       light: "#1e40af",
+      blackHeader: "rgba(0,0,0,0.87)",
+      black: "rgb(0,0,0)",
     },
     fontFamily: {
       sans: ["Graphik", "sans-serif"],

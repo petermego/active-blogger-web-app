@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.postUser = (req, res) => {
   const errors = validationResult(req);
@@ -38,12 +39,20 @@ exports.postUser = (req, res) => {
     const { fname, lname, username, email, password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 12);
     User.findUserByEmail(email)
-      .then(([raw]) => {
-        if (!raw.length) {
+      .then(([row]) => {
+        if (!row.length) {
           const date = new Date().toISOString().slice(0, 19).replace("T", " ");
           const user = new User(fname, lname, email, hashedPassword, username, date);
           user.save();
-          return res.status(201).json({ error: false, message: "signed up successfuly" });
+          const tokenSecret = process.env.JWT_TOKEN_SECRET;
+          const token = jwt.sign(
+            {
+              user: row[0],
+            },
+            tokenSecret,
+            { expiresIn: "30d" }
+          );
+          return res.status(201).json({ error: false, user, token });
         }
         return res.status(200).json({ error: true, message: "this E-mail is used, Please make a new one." });
       })

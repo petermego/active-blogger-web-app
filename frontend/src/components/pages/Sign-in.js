@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import Button from "../ui/Button";
@@ -15,6 +15,11 @@ const SignIn = () => {
   const [modalShow, setModalShow] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.title = "Active | Sign in";
+    if (localStorage.length) return localStorage.clear();
+  }, []);
 
   const submitHandler = async (event) => {
     event.preventDefault();
