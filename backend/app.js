@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 });
 
 const apiLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000,
+  windowMs: 15 * 60 * 1000,
   max: 100,
   message: 'Too many requests at short time.',
   standardHeaders: true,

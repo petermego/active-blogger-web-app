@@ -57,7 +57,7 @@ const SignUp = () => {
   return (
     <Fragment>
       <form className="flex center style" onSubmit={submitHandler}>
-        <div className=" name">
+        <div className="name" style={{ marginBottom: '2.2rem' }}>
           <input required type="text" ref={firstNameRef} name="fname" placeholder='Enter your first name...' />
           <input required type="text" ref={lastNameRef} name="lname" placeholder='Enter your last name...' />
         </div>
