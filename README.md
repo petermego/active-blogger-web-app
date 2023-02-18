@@ -1,4 +1,4 @@
-# active-ecommerce-web-app
-active is a modern web application for electronic commerce created by React js, Node.js, Express js and MySQL provides many features.
+# active-blogger-web-app
+active is a modern web application for bloggers created by MERN Stack => React js, Node.js, Express js and Mongodb provides many features.
 ## features:
 stay tuned...
