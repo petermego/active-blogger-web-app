@@ -3,7 +3,7 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-exports.postUser = (req, res) => {
+exports.postUser = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const validationErrors = errors.array();
@@ -36,27 +36,30 @@ exports.postUser = (req, res) => {
     return res.status(200).json({ error: true, message });
   }
   try {
-    const { fname, lname, username, email, password } = req.body;
+    const { fname, lname, email, password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 12);
-    User.findUserByEmail(email)
-      .then(([row]) => {
-        if (!row.length) {
-          const date = new Date().toISOString().slice(0, 19).replace("T", " ");
-          const user = new User(fname, lname, email, hashedPassword, username, date);
-          user.save();
-          const tokenSecret = process.env.JWT_TOKEN_SECRET;
-          const token = jwt.sign(
-            {
-              user: row[0],
-            },
-            tokenSecret,
-            { expiresIn: "30d" }
-          );
-          return res.status(201).json({ error: false, user, token });
-        }
-        return res.status(200).json({ error: true, message: "this E-mail is used, Please make a new one." });
-      })
+    const usedEmail = await User.find({ email });
+    if (!usedEmail.length) {
+      const user = new User({
+        firstName: fname,
+        lastName: lname,
+        email: email,
+        password: hashedPassword,
+      });
+      await user.save()
+        .catch(err => console.log(err));
+      const tokenSecret = process.env.JWT_TOKEN_SECRET;
+      const token = jwt.sign(
+        {
+          user: user,
+        },
+        tokenSecret,
+        { expiresIn: "30d" }
+      );
+      return res.status(201).json({ error: false, user, token });
+    }
+    return res.status(200).json({ error: true, message: "this E-mail is used, Please make a new one." });
   } catch(error) {
-    return res.status(500).json({ error: true, message: "Internal server error" });
+    return res.status(500).json({ error: true, message: "Internal server error", error });
   }
 };

@@ -16,7 +16,6 @@ router.post(
   [
     body("fname").trim().isLength({ min: 3 }),
     body("lname").trim().isLength({ min: 3 }),
-    body("username").trim().isLength({ min: 6 }),
     body("email").trim().isEmail().normalizeEmail(),
     body("password").isLength({ min: 8 }),
   ],

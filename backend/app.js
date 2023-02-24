@@ -3,11 +3,17 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
+const connectDB = require("./utils/db");
+
+const dotenv = require('dotenv');
+dotenv.config();
 
 const errorUndefiendController = require('./controllers/error-404');
 const signup = require('./routes/signup');
 const signin = require('./routes/login');
-const { isAuth } = require("./middleware/isAuth");
+const user = require('./routes/user');
+
+connectDB();
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -25,12 +31,13 @@ const apiLimiter = rateLimit({
   legacyHeaders: false,
 });
 
+app.use("/upload", express.static("./uploads"));
 app.use(express.json());
 app.use(cors());
-app.use(apiLimiter)
-app.get('/auth', isAuth);
+app.use(apiLimiter);
 app.use(signup);
 app.use(signin);
+app.use(user);
 app.use(errorUndefiendController.getUndefiend);
 
 const port = process.env.PORT || 8080;
