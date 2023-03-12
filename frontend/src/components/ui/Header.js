@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import LogoutIcon from "@mui/icons-material/Logout";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import { logout } from "../../features/user-slice";
@@ -31,7 +30,6 @@ const Header = (props) => {
           <input type="text" placeholder="Search..." />
         </div>
         <nav className="user-info">
-          <ShoppingCartIcon />
           <PersonIcon />
           <LogoutIcon className="logout-icon" onClick={logoutHandler} />
         </nav>
