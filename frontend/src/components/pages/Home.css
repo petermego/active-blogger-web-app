@@ -1,0 +1,44 @@
+.feed {
+  height: 100%;
+  width: 30rem;
+  margin: auto;
+  padding-top: 2rem;
+}
+
+.add-feed {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin: auto;
+  font-weight: 700;
+  font-size: large;
+  width: 100%;
+  background-color: #f5c518;
+  height: 3rem;
+  border-radius: .6rem;
+  cursor: pointer;
+}
+
+.add-feed span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: black;
+  color: #f5c518;
+  border-radius: 50%;
+}
+
+.add-feed:active {
+  background-color: rgb(179, 144, 18);
+}
+
+@media (max-width:480px) {
+  .add-feed {
+    font-size: medium;
+    width: 80%;
+  }
+}
