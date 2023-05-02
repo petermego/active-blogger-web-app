@@ -20,7 +20,7 @@
 }
 
 .modal .content {
-  height: 35vh;
+  height: 55vh;
   width: 30rem;
   display: flex;
   flex-direction: column;
@@ -37,12 +37,57 @@
   align-items: center;
 }
 
+.modal .content form input[type="submit"] {
+  background-color: black;
+  color: #f5c518;
+  width: 60%;
+  border-radius: .6rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
 .modal .content form textarea {
-  resize: none;
+  margin-top: 20px;
+  outline: none;
+  padding: 15px;
+  resize: horizontal;
+  max-width: 90%;
+}
+
+.modal .content form input[type="file"] {
+  display: none;
+}
+
+.modal .content form label {
+  color: #f5c518;
+  width: 60%;
+  background-color: black;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: .6rem;
+}
+
+.modal .content form button {
+  width: 60%;
 }
 
 @media (max-width:480px) {
+  .modal .content form input[type="submit"] {
+    width: 80%;
+  }
+
+  .modal .content form button {
+    width: 80%;
+  }
+
+  .modal .content form label {
+    width: 80%;
+  }
+
   .modal .content {
-    width: 22rem;
+    width: 19rem;
   }
 }

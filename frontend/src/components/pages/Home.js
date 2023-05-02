@@ -10,9 +10,13 @@ const Home = () => {
     document.title = `Active | Home`;
   }, []);
 
-  const modalCloseHandler = (event) => {
+  const onClose = () => {
+    setModalShow(false);
+  };
+
+  const submitHandler = (event) => {
     event.preventDefault();
-    
+
     setModalShow(false);
   };
 
@@ -26,7 +30,7 @@ const Home = () => {
         <span>+</span>
         <p>Share your experience</p>
       </div>
-      { modalShow && <Modal onClose={modalCloseHandler} feed={"FORM"} /> }
+      {modalShow && <Modal submitHandler={submitHandler} onClose={onClose} feed={"FORM"} />}
     </div>
   );
 };

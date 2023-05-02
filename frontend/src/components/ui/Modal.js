@@ -12,18 +12,20 @@ const ModalOverlay = (props) => {
     return (
       <div className="modal">
         <div className="content">
-          <form onSubmit={props.onClose}>
+          <form onSubmit={props.submitHandler}>
             <textarea
               required
               autoFocus
               maxLength="200"
               name="caption"
               cols="30"
-              rows="5"
+              rows="4"
               placeholder="what's in your mind"
             />
-            <input type="file" name="asset" />
-            <button>Post</button>
+            <input type="file" id="file" name="asset" accept="image/*" />
+            <label htmlFor="file">Choose a Photo</label>
+            <input type="submit" value="Post" />
+            <button onClick={props.onClose}>Close</button>
           </form>
         </div>
       </div>
