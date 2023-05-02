@@ -16,4 +16,11 @@ router.post(
 
 router.get("/auth", isAuth);
 
+router.post(
+  "/user/post",
+  upload.single("image"),
+  handleMulterError,
+  userController.postUserExperience
+);
+
 module.exports = router;

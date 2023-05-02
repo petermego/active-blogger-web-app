@@ -17,3 +17,12 @@ exports.postUserImg = async (req, res) => {
     return res.status(500).json({ error: true, message: "Internal server error", error });
   }
 };
+
+// TODO
+exports.postUserExperience = (req, res) => {
+  try {
+    
+  } catch (error) {
+    return res.status(500).json({ error: true, message: "Internal server error", error });
+  }
+};
