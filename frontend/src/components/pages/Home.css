@@ -36,6 +36,27 @@
   background-color: rgb(179, 144, 18);
 }
 
+.line {
+  height: 2px;
+  width: 100%;
+  background-color: red;
+  animation: colorChange 1s infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: red;
+  }
+
+  50% {
+    background-color: green;
+  }
+
+  100% {
+    background-color: blue;
+  }
+}
+
 @media (max-width:480px) {
   .add-feed {
     font-size: medium;

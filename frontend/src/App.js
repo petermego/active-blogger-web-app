@@ -16,30 +16,32 @@ const App = () => {
   const user = useSelector(state => state.user.user);
   const dispatch = useDispatch();
   
-  useEffect(() => {
-    const authHandler = async () => {
-      const response = await isAuth();
-      if (response === null) return;
-      dispatch(login(response));
-    };
-    try {
-      authHandler();
-    } catch (error) {
-      console.log(error.message);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const authHandler = async () => {
+  //     const response = await isAuth();
+  //     if (response === null) return;
+  //     dispatch(login(response));
+  //   };
+  //   try {
+  //     authHandler();
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // }, []);
 
   return (
     <Fragment>
       <Header />
       <main className="flex w-100% bg-black h-90vh min-h-90vh">
         <Routes>
-          <Route path="/">
+          <Route path="/" exact>
             { useEffect(() => user ? navigate('/home') : navigate('/sign-in'), []) }
           </Route>
           <Route path="/sign-up" exact element={<SignUp />} />
           <Route path="/sign-in" exact element={<SignIn />} />
-          { user && <Route path="/home" exact element={<Home />} /> }
+          <Route path="/home" exact element={<Home />}>
+            { useEffect(() => user ? navigate('/home') : navigate('/sign-in'), []) }
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

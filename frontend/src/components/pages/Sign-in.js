@@ -27,7 +27,7 @@ const SignIn = () => {
       const req = await SignInReq(emailRef.current.value, passwordRef.current.value);
       if (!req.error) {
         const { token, user } = req;
-        dispatch(login(user));
+        dispatch(login({user, token}));
         localStorage.setItem("user-info", JSON.stringify({user, token}));
         return navigation("/home");
       }

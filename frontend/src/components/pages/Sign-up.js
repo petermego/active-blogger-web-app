@@ -35,7 +35,7 @@ const SignUp = () => {
         passwordRef.current.value
       );
       if (!req.error) {
-        dispatch(login(req.user));
+        dispatch(login({user: req.user, token: req.token}));
         localStorage.clear();
         localStorage.setItem("user-info", JSON.stringify({ user: req.user, token: req.token }));
         return navigate('/home');

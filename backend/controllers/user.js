@@ -19,10 +19,21 @@ exports.postUserImg = async (req, res) => {
 };
 
 // TODO
-exports.postUserExperience = (req, res) => {
+// for blog that contain files
+exports.postBlog = (req, res) => {
   try {
-    
+    const imagePath = "upload/" + req.file.filename;
+    const { blog } = req.body;
+    console.log(blog);
+    console.log(imagePath);
+    return res.status(201).json('uploaded successfully!');
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ error: true, message: "Internal server error", error });
   }
+};
+//TODO
+// for blog that not contain files
+exports.postExperience = (req, res) => {
+
 };

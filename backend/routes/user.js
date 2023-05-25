@@ -9,6 +9,7 @@ const userController = require("../controllers/user");
 
 router.post(
   "/user/upload-img/",
+  isAuth,
   upload.single("image"),
   handleMulterError,
   userController.postUserImg
@@ -17,10 +18,18 @@ router.post(
 router.get("/auth", isAuth);
 
 router.post(
-  "/user/post",
-  upload.single("image"),
+  "/user/share-blog",
+  isAuth,
+  upload.single("file"),
   handleMulterError,
-  userController.postUserExperience
+  userController.postBlog
+);
+
+router.post(
+  "user/share-experience",
+  upload.single("file"),
+  isAuth,
+  userController.postExperience
 );
 
 module.exports = router;

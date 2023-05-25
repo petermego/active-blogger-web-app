@@ -21,7 +21,7 @@ const Header = (props) => {
 
   if (user && window.location.pathname === '/home') {
     return (
-      <header className="flex z-40 bg-blackHeader text-5xl text-black font-serif w-100% h-10vh justify-between items-center">
+      <header className="flex z-40 bg-blackHeader text-5xl text-black font-serif w-100% justify-between items-center">
         <span>
           <Link to={"/home"}>ACTIVE</Link>
         </span>
@@ -41,7 +41,7 @@ const Header = (props) => {
   }
 
   return (
-    <header className="flex pl-10 pr-10 z-40 bg-blackHeader text-5xl text-black font-serif w-100% h-10vh justify-center items-center">
+    <header className="flex pl-10 pr-10 z-40 bg-blackHeader text-5xl text-black font-serif w-100% justify-center items-center">
       <span>
         <Link to={"/home"}>ACTIVE</Link>
       </span>

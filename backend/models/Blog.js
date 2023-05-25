@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
+const user = require("./user");
 
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
-  userId: {
-    type: Schema.Types.ObjectId,
+  user: {
+    type: user,
     required: true,
     ref: "User",
   },
@@ -12,13 +13,18 @@ const blogSchema = new Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    default: '',
+  },
   createdDate: {
     type: Date,
     default: Date.now,
   },
   likes: {
-    type: Number,
-    default: 0
+    type: [user],
+    ref: "User",
+    default: [],
   }
 });
 

@@ -20,7 +20,7 @@
 }
 
 .modal .content {
-  height: 55vh;
+  height: 475px;
   width: 30rem;
   display: flex;
   flex-direction: column;
@@ -50,7 +50,7 @@
   margin-top: 20px;
   outline: none;
   padding: 15px;
-  resize: horizontal;
+  resize:none;
   max-width: 90%;
 }
 

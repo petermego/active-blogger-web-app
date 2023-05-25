@@ -8,12 +8,14 @@ const BackDrop = () => {
 };
 
 const ModalOverlay = (props) => {
+
   if (props.feed === "FORM") {
     return (
       <div className="modal">
         <div className="content">
           <form onSubmit={props.submitHandler}>
             <textarea
+              ref={props.inputRef}
               required
               autoFocus
               maxLength="200"
@@ -22,7 +24,16 @@ const ModalOverlay = (props) => {
               rows="4"
               placeholder="what's in your mind"
             />
-            <input type="file" id="file" name="asset" accept="image/*" />
+            {props.spaceProblem && (
+              <span style={{ color: "red" }}>you should write more than 5 letters</span>
+            )}
+            <input
+              type="file"
+              id="file"
+              name="asset"
+              accept="image/*"
+              onChange={(e) => props.setImg(e.target.files[0])}
+            />
             <label htmlFor="file">Choose a Photo</label>
             <input type="submit" value="Post" />
             <button onClick={props.onClose}>Close</button>
@@ -52,6 +63,10 @@ export const Modal = (props) => {
           onClose={props.onClose}
           value={props.children}
           feed={props.feed}
+          inputRef={props.inputRef}
+          setImg={props.setImg}
+          submitHandler={props.submitHandler}
+          spaceProblem={props.spaceProblem}
         />,
         portalElement
       )}
