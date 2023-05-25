@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
-const user = require("./user");
 
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
   user: {
-    type: user,
+    type: Object,
     required: true,
     ref: "User",
   },
@@ -22,7 +21,7 @@ const blogSchema = new Schema({
     default: Date.now,
   },
   likes: {
-    type: [user],
+    type: [Object],
     ref: "User",
     default: [],
   }

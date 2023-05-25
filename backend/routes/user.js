@@ -8,9 +8,9 @@ const handleMulterError  = require("../middleware/multer-error");
 const userController = require("../controllers/user");
 
 router.post(
-  "/user/upload-img/",
+  "/user/upload-img/:id",
   isAuth,
-  upload.single("image"),
+  upload.single("file"),
   handleMulterError,
   userController.postUserImg
 );

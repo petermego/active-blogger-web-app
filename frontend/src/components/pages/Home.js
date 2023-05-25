@@ -46,8 +46,9 @@ const Home = () => {
         likes: [],
       };
       const formData = new FormData();
-      formData.append('file', img);
-      formData.append("blog", blog);
+      formData.append("file", img);
+      formData.append("blog", JSON.stringify(blog));
+      
       const [response, status] = await addBlog(formData, user.token);
       switch (status) {
         case 403:
