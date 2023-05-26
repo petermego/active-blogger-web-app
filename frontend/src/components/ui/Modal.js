@@ -34,7 +34,7 @@ const ModalOverlay = (props) => {
               accept="image/*"
               onChange={(e) => props.setImg(e.target.files[0])}
             />
-            <label htmlFor="file">Choose a Photo</label>
+            <label htmlFor="file">{props.img ? props.img.name : "Choose a Photo"}</label>
             <input type="submit" value="Post" />
             <button onClick={props.onClose}>Close</button>
           </form>
@@ -67,6 +67,7 @@ export const Modal = (props) => {
           setImg={props.setImg}
           submitHandler={props.submitHandler}
           spaceProblem={props.spaceProblem}
+          img={props.img}
         />,
         portalElement
       )}

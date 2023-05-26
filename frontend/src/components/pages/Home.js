@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 import "./Home.css";
 import { Modal } from "../ui/Modal";
-import { addBlog } from "../../utils/Apis";
+import { addBlog, addExperience } from "../../utils/Apis";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/user-slice";
 
 
-const Home = () => {
+const Home = (props) => {
   const [modalShow, setModalShow] = useState(false);
   const [img, setImg] = useState(null);
   const [spaceProblem, setSpaceProblem] = useState(false);
@@ -27,12 +27,39 @@ const Home = () => {
     setModalShow(false);
   };
 
+  const checkStatus = (response, status) => {
+    switch (status) {
+      case 201 || 200:
+        props.setError(response.error);
+        props.setMessage(response.message);
+        props.setCurrent(true);
+        break;
+      case 403:
+        dispatch(logout());
+        navigate("/sign-in");
+        props.setError(response.error);
+        props.setMessage(response.message);
+        props.setCurrent(true);
+        break;
+      case 401:
+        dispatch(logout());
+        navigate("/sign-in");
+        props.setError(response.error);
+        props.setMessage(response.message);
+        props.setCurrent(true);
+        break;
+      case 500:
+        props.setError(response.error);
+        props.setMessage(response.message);
+        props.setCurrent(true);
+        break;
+      default:
+        break;
+    }
+  };
+
   const submitHandler = async (event) => {
     event.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
     
     if (!(formInputRef.current.value.trim().length >= 5)) {
       setSpaceProblem(true);
@@ -52,28 +79,27 @@ const Home = () => {
       formData.append("blog", JSON.stringify(blog));
       
       const [response, status] = await addBlog(formData, user.token);
-      switch (status) {
-        case 403:
-          dispatch(logout());
-          navigate("/sign-in");
-          break;
-        case 401:
-          dispatch(logout());
-          navigate("/sign-in");
-          break;
-        case 500:
-          break;
-        default:
-          break;
-      }
+      checkStatus(response, status);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
       return;
-    } //TODO
-    
+    }
+    const blog = {
+      user: user.user,
+      body: formInputRef.current.value,
+      createdDate: new Date(),
+      likes: [],
+    };
     const formData = new FormData();
-    formData.append('file', img);
-    formData.append("user", user);
-    formData.append("", user);
-    const request = addBlog(user, { user,  });
+    formData.append("blog", JSON.stringify(blog));
+    const [response, status] = await addExperience(formData, user.token);
+    checkStatus(response, status);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const modalFormHandler = () => {
@@ -92,6 +118,7 @@ const Home = () => {
           onClose={onClose}
           feed={"FORM"}
           inputRef={formInputRef}
+          img={img}
           setImg={setImg}
           spaceProblem={spaceProblem}
         />

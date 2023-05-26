@@ -46,11 +46,10 @@ export const addBlog = async (formData, clientToken) => {
 };
 
 export const addExperience = async (formData, clientToken) => {
-  return await fetch(process.env.REACT_APP_ADD_EXPERIENCE, {
-    method: "POST",
-    body: JSON.stringify(Object.fromEntries(formData)),
+  return await axios.post(process.env.REACT_APP_ADD_EXPERIENCE, formData, {
     headers: {
-      Authorization: "Bearer " + clientToken,
-    },
-  }).then((res) => [res.json(), res.status]);
+      Authorization: `Bearer ${clientToken}`
+    }
+  }).then((res) => [res.data, res.status])
+    .catch(error => console.log(error));
 };

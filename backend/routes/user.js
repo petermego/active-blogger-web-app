@@ -26,7 +26,7 @@ router.post(
 );
 
 router.post(
-  "user/share-experience",
+  "/user/share-experience",
   upload.single("file"),
   isAuth,
   userController.postExperience

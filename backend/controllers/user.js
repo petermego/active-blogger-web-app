@@ -18,18 +18,21 @@ exports.postUserImg = async (req, res) => {
 };
 
 // for blog that contain files
-exports.postBlog = (req, res) => {
+exports.postBlog = async (req, res) => {
   try {
     const imagePath = "upload/" + req.file.filename;
     const blogData = JSON.parse(req.body.blog);
     const blog = new Blog({
-      user: blogData.user,
+      user: blogData.user._id,
       body: blogData.body,
       image: imagePath,
       createdDate: blogData.createdDate,
-      likes: []
     });
-    blog.save()
+    await blog.save()
+      .catch(err => console.log(err));
+    const user = await User.findById(blogData.user._id);
+    user.blogs.push(blog);
+    user.save()
       .catch(err => console.log(err));
     return res.status(201).json({ error: false, message: "uploaded successfully!" });
   } catch (error) {
@@ -37,8 +40,25 @@ exports.postBlog = (req, res) => {
     return res.status(500).json({ error: true, message: "Internal server error", error });
   }
 };
-//TODO
-// for blog that not contain files
-exports.postExperience = (req, res) => {
 
+// for blog that not contain files
+exports.postExperience = async (req, res) => {
+  try {
+    const blogData = JSON.parse(req.body.blog);
+    const blog = new Blog({
+      user: blogData.user._id,
+      body: blogData.body,
+      createdDate: blogData.createdDate,
+    });
+    await blog.save()
+      .catch(err => console.log(err));
+    const user = await User.findById(blogData.user._id);
+    user.blogs.push(blog);
+    user.save()
+      .catch(err => console.log(err));
+    return res.status(201).json({ error: false, message: "uploaded successfully!" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: true, message: "Internal server error", error });
+  }
 };

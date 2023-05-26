@@ -45,6 +45,10 @@ const App = () => {
     dispatch({ type: "SET_CURRENT", payload: current });
   };
 
+  const mainStyle = {
+    height: "calc(100vh - 86px)",
+  };
+
   return (
     <Fragment>
       <Header
@@ -53,7 +57,7 @@ const App = () => {
         setMessage={setMessage}
         setCurrent={setCurrent}
       />
-      <main className="flex w-100% bg-black h-90vh min-h-90vh">
+      <main style={mainStyle} className="flex w-100% bg-black">
         <Routes>
           <Route path="/" exact>
             {useEffect(
@@ -66,16 +70,16 @@ const App = () => {
           <Route
             path="/home"
             exact
-            element={<Home />}
-            msgState={state}
-            setError={setError}
-            setMessage={setMessage}
-            setCurrent={setCurrent}
+            element={
+              <Home
+                msgState={state}
+                setError={setError}
+                setMessage={setMessage}
+                setCurrent={setCurrent}
+              />
+            }
           >
-            {useEffect(
-              () => (user ? navigate("/home") : navigate("/sign-in")),
-              []
-            )}
+            {useEffect(() => (user ? navigate("/home") : navigate("/sign-in")),[])}
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

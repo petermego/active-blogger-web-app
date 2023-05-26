@@ -61,9 +61,6 @@ const SignUp = () => {
           <input required type="text" ref={firstNameRef} name="fname" placeholder='Enter your first name...' />
           <input required type="text" ref={lastNameRef} name="lname" placeholder='Enter your last name...' />
         </div>
-        <div className='username input'>
-          <input required type="text" ref={uniqueNameRef} name="username" placeholder='Enter a unique name...' />
-        </div>
         <div className='email input'>
           <input required type="email" ref={emailRef} name="email" placeholder='Enter your E-mail...' />
         </div>
