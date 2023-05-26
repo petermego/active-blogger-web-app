@@ -3,11 +3,39 @@ header {
   height: 86px;
 }
 
+.header-message {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.header-message button {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  width: 50px;
+}
+
+.error {
+  background-color: rgb(139, 0, 0);
+  color: #f5c518;
+}
+
+.normal {
+  background-color: #f5c518;
+  color: black;
+}
+
 header span {
   padding: .2rem;
   background-color: rgb(245, 197, 24);
   font-weight: 600;
   font-size: 2.2rem;
+  cursor: pointer;
 }
 
 .search {
@@ -60,6 +88,29 @@ header span {
 .header-menu svg {
   color: #f5c518;
   cursor: pointer;
+}
+
+.scrolling-bar {
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, 
+  #f5c518, black,#f5c518,
+  black, #f5c518, black,#f5c518,
+  black, #f5c518, black,#f5c518,
+  black, #f5c518, black,#f5c518, black
+);
+  background-size: 200% 100%;
+  animation: scrolling 5s linear infinite;
+}
+
+@keyframes scrolling {
+  0% {
+    background-position: 100% 0%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
 }
 
 @media (max-width: 1200px) {

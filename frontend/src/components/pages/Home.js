@@ -13,7 +13,6 @@ const Home = () => {
   const [img, setImg] = useState(null);
   const [spaceProblem, setSpaceProblem] = useState(false);
   const formInputRef = useRef();
-  const [loading, setLoading] = useState();
 
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -29,11 +28,14 @@ const Home = () => {
   };
 
   const submitHandler = async (event) => {
-    setLoading(true);
     event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    
     if (!(formInputRef.current.value.trim().length >= 5)) {
       setSpaceProblem(true);
-      setLoading(false);
       return;
     }
     setSpaceProblem(false);
@@ -64,7 +66,6 @@ const Home = () => {
         default:
           break;
       }
-      setLoading(false);
       return;
     } //TODO
     
@@ -73,7 +74,6 @@ const Home = () => {
     formData.append("user", user);
     formData.append("", user);
     const request = addBlog(user, { user,  });
-    setLoading(false);
   };
 
   const modalFormHandler = () => {
@@ -82,7 +82,6 @@ const Home = () => {
 
   return (
     <div className="feed">
-      {loading && <div className="line"></div>}
       <div className="add-feed" onClick={modalFormHandler}>
         <span>+</span>
         <p>Share your experience</p>
