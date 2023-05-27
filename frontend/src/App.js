@@ -8,6 +8,7 @@ import NotFound from "./components/pages/NotFound";
 import SignIn from "./components/pages/Sign-in";
 import { useSelector } from "react-redux";
 import Home from "./components/pages/Home";
+import User from "./components/pages/user";
 
 const initialState = {
   error: false,
@@ -79,6 +80,9 @@ const App = () => {
               />
             }
           >
+            {useEffect(() => (user ? navigate("/home") : navigate("/sign-in")),[])}
+          </Route>
+          <Route path="/user/:id" element={<User />}>
             {useEffect(() => (user ? navigate("/home") : navigate("/sign-in")),[])}
           </Route>
           <Route path="*" element={<NotFound />} />

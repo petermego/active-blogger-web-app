@@ -78,6 +78,10 @@ header span {
   cursor: pointer;
 }
 
+.user-info a svg {
+  height: 55px;
+}
+
 .header-menu {
   display: none;
   align-items: center;

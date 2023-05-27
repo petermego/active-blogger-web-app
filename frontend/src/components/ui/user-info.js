@@ -1,0 +1,60 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import "./user-info.css";
+
+const UserInfo = (props) => {
+  const user = useSelector((state) => state.user);
+  const [img, setImg] = useState(null);
+
+  if (props.sameUser) {
+    const imagePath = user.user.imagePath ? user.user.imagePath : "";
+    const firstName = user.user.firstName;
+    const lastName = user.user.lastName;
+    const email = user.user.email;
+    const joinedDate = user.user.createdDate;
+    let date = new Date(joinedDate);
+    let month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    return (
+      <div className="user-data">
+        {imagePath.length ? (
+          <img className="user-img" src={imagePath} alt={firstName} />
+        ) : (
+          <div className="user-img">
+            {firstName[0]}
+            <input
+              type="file"
+              id="file"
+              name="asset"
+              accept="image/*"
+              onChange={(e) => setImg(e.target.files[0])}
+            />
+            <label htmlFor="file">+</label>
+          </div>
+        )}
+        <div className="user">
+          <div className="username">
+            <p>
+              {firstName} {lastName}
+            </p>
+          </div>
+          <div className="email-date">
+            <p>{email}</p>
+            <p>
+              Joind: {month[date.getMonth()]} {date.getFullYear()}
+            </p>
+          </div>
+          <div className="pen-icon">
+            <Link to={`/edit-user/${user.user._id}`}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
+          </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+};
+
+export default UserInfo;

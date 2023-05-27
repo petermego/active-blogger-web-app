@@ -1,0 +1,97 @@
+.user-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: #f5c518;
+  height: 20rem;
+}
+
+.user-data .user-img {
+  position: relative;
+  background-color: rgb(67, 65, 65);
+  height: 15rem;
+  width: 15rem;
+  font-size: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.user-data .user-img input[type="file"] {
+  display: none;
+}
+
+.user-data .user-img label {
+  position: absolute;
+  bottom: -20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  background-color: rgb(245, 197, 24);
+  color: black;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.user-data .username {
+  font-size: 28px;
+  font-weight: bold;
+}
+.user {
+  position: relative;
+}
+
+.user div {
+  margin: 20px 0;
+}
+
+.user .email-date p {
+  margin: 10px 0;
+}
+
+.pen-icon {
+  position: absolute;
+  background-color: #f5c518;
+  height: 20px;
+  width: 20px;
+  top: -20px;
+  right: 0;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 976px) {}
+
+@media (max-width: 768px) {
+  .user-data .user-img {
+    height: 12rem;
+    width: 12rem;
+  }
+
+  .user-data .user-img label {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-data .user-img {
+    height: 10rem;
+    width: 10rem;
+  }
+  .user-data {
+    flex-direction: column;
+  }
+  .user-data .username {
+    margin-top: 2rem;
+  }
+}
