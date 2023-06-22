@@ -12,6 +12,7 @@ const errorUndefiendController = require('./controllers/error-404');
 const signup = require('./routes/signup');
 const signin = require('./routes/login');
 const user = require('./routes/user');
+const blog = require("./routes/blog");
 
 connectDB();
 
@@ -38,6 +39,7 @@ app.use(apiLimiter);
 app.use(signup);
 app.use(signin);
 app.use(user);
+app.use(blog);
 app.use(errorUndefiendController.getUndefiend);
 
 const port = process.env.PORT || 8080;

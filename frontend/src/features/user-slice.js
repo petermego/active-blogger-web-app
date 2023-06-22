@@ -20,7 +20,10 @@ export const userSlice = createSlice({
     login: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
-      console.log(action.payload.user);
+    },
+    setImg: (state, action) => {
+      state.user.imagePath = action.payload;
+      localStorage.setItem("user-info", state);
     },
     logout: (state) => {
       localStorage.clear();
@@ -30,5 +33,5 @@ export const userSlice = createSlice({
   }
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, setImg } = userSlice.actions;
 export default userSlice.reducer;

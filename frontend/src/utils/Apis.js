@@ -53,3 +53,14 @@ export const addExperience = async (formData, clientToken) => {
   }).then((res) => [res.data, res.status])
     .catch(error => console.log(error));
 };
+
+export const addUserImg = async (formData, clientToken, id) => {
+  return await axios
+    .post(`${process.env.REACT_APP_ADD_User_Img}${id}`, formData, {
+      headers: {
+        Authorization: `Bearer ${clientToken}`,
+      }
+    })
+    .then((res) => [res.data, res.status])
+    .catch((error) => console.log(error));
+};

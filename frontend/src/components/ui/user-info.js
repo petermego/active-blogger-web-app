@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import "./user-info.css";
+import { addUserImg } from "../../utils/Apis";
+
 
 const UserInfo = (props) => {
   const user = useSelector((state) => state.user);
-  const [img, setImg] = useState(null);
+
+  const uploadImg = async (img) => {
+    console.log(img);
+    const formData = new FormData();
+    formData.append("file", img);
+    const [data, status] = await addUserImg(formData, user.token, user.user._id);
+    console.log(data);
+    localStorage.setItem("user-info", JSON.stringify({ user, token: user.token }));
+  };
 
   if (props.sameUser) {
     const imagePath = user.user.imagePath ? user.user.imagePath : "";
@@ -16,11 +26,11 @@ const UserInfo = (props) => {
     const joinedDate = user.user.createdDate;
     let date = new Date(joinedDate);
     let month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
+    console.log(imagePath);
     return (
       <div className="user-data">
         {imagePath.length ? (
-          <img className="user-img" src={imagePath} alt={firstName} />
+          <img className="user-img" src={`http://localhost:8080/${imagePath}`} alt={firstName} />
         ) : (
           <div className="user-img">
             {firstName[0]}
@@ -29,7 +39,7 @@ const UserInfo = (props) => {
               id="file"
               name="asset"
               accept="image/*"
-              onChange={(e) => setImg(e.target.files[0])}
+              onChange={(e) => uploadImg(e.target.files[0])}
             />
             <label htmlFor="file">+</label>
           </div>

@@ -8,10 +8,12 @@ exports.postUserImg = async (req, res) => {
     }
     const userId = req.params.id;
     const imagePath = "upload/" + req.file.filename;
-    console.log(imagePath);
-    const updatedUser = await User.findByIdAndUpdate(userId, { imagePath }, { new: true })
+    const user = await User.findById(userId)
       .catch(err => console.log(err));
-    return res.status(201).json({ error: false, imagePath });
+    user.imagePath = imagePath;
+    user.save()
+      .catch(err => console.log(err));
+    return res.status(201).json({ error: false, user });
   } catch (error) {
     return res.status(500).json({ error: true, message: "Internal server error", error });
   }

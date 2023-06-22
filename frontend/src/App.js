@@ -80,10 +80,26 @@ const App = () => {
               />
             }
           >
-            {useEffect(() => (user ? navigate("/home") : navigate("/sign-in")),[])}
+            {useEffect(
+              () => (user ? navigate("/home") : navigate("/sign-in")),
+              []
+            )}
           </Route>
-          <Route path="/user/:id" element={<User />}>
-            {useEffect(() => (user ? navigate("/home") : navigate("/sign-in")),[])}
+          <Route
+            path="/user/:id"
+            element={
+              <User
+                msgState={state}
+                setError={setError}
+                setMessage={setMessage}
+                setCurrent={setCurrent}
+              />
+            }
+          >
+            {useEffect(
+              () => (user ? navigate("/home") : navigate("/sign-in")),
+              []
+            )}
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -12,7 +12,13 @@ const User = (props) => {
   if (userId === user.user._id) {
     return (
       <div className="user-container">
-        <UserInfo sameUser={true} />
+        <UserInfo
+          sameUser={true}
+          msgState={props.state}
+          setError={props.setError}
+          setMessage={props.setMessage}
+          setCurrent={props.setCurrent}
+        />
       </div>
     );
   }
