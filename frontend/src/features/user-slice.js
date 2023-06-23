@@ -22,8 +22,9 @@ export const userSlice = createSlice({
       state.token = action.payload.token;
     },
     setImg: (state, action) => {
-      state.user.imagePath = action.payload;
-      localStorage.setItem("user-info", state);
+      localStorage.setItem("user-info", JSON.stringify(action.payload));
+      state.user = action.payload.user;
+      state.token = action.payload.token;
     },
     logout: (state) => {
       localStorage.clear();

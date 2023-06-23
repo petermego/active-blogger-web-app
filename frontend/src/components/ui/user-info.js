@@ -1,21 +1,24 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import "./user-info.css";
 import { addUserImg } from "../../utils/Apis";
+import { setImg } from "../../features/user-slice";
 
 
 const UserInfo = (props) => {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const uploadImg = async (img) => {
     console.log(img);
     const formData = new FormData();
     formData.append("file", img);
     const [data, status] = await addUserImg(formData, user.token, user.user._id);
-    console.log(data);
-    localStorage.setItem("user-info", JSON.stringify({ user, token: user.token }));
+    if (status === 403 || status === 401) {
+      localStorage.clear();
+    }
+    dispatch(setImg({user: data.user, token: user.token}));
   };
 
   if (props.sameUser) {
