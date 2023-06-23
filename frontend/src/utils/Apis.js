@@ -64,3 +64,14 @@ export const addUserImg = async (formData, clientToken, id) => {
     .then((res) => [res.data, res.status])
     .catch((error) => console.log(error));
 };
+
+export const getAllBlogs = async (clientToken) => {
+  return await axios
+    .get(process.env.REACT_APP_GET_BLOGS, {
+      headers: {
+        Authorization: `Bearer ${clientToken}`,
+      },
+    })
+    .then((res) => [res.data, res.status])
+    .catch((error) => console.log(error));
+};

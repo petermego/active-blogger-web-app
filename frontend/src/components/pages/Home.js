@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./Home.css";
 import { Modal } from "../ui/Modal";
-import { addBlog, addExperience } from "../../utils/Apis";
+import { addBlog, addExperience, getAllBlogs } from "../../utils/Apis";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/user-slice";
 
@@ -12,6 +12,7 @@ const Home = (props) => {
   const [modalShow, setModalShow] = useState(false);
   const [img, setImg] = useState(null);
   const [spaceProblem, setSpaceProblem] = useState(false);
+  const [blogs, setBlogs] = useState(null);
   const formInputRef = useRef();
 
   const user = useSelector((state) => state.user);
@@ -106,6 +107,17 @@ const Home = (props) => {
     setModalShow(true);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const [data, status] = await getAllBlogs(user.token);
+      if (status === 403 || status === 401) {
+        localStorage.clear();
+      }
+      //TODO => convert data to blog
+    }
+    fetchData();
+  }, [user]);
+
   return (
     <div className="feed">
       <div className="add-feed" onClick={modalFormHandler}>
@@ -123,6 +135,7 @@ const Home = (props) => {
           spaceProblem={spaceProblem}
         />
       )}
+      <div className="timeline"></div>
     </div>
   );
 };

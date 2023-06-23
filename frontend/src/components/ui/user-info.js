@@ -29,7 +29,6 @@ const UserInfo = (props) => {
     const joinedDate = user.user.createdDate;
     let date = new Date(joinedDate);
     let month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    console.log(imagePath);
     return (
       <div className="user-data">
         {imagePath.length ? (
