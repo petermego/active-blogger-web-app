@@ -6,13 +6,16 @@ import { Modal } from "../ui/Modal";
 import { addBlog, addExperience, getAllBlogs } from "../../utils/Apis";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/user-slice";
-
+import {
+  VerticalTimeline
+} from "react-vertical-timeline-component";
+import Blog from "../ui/Blog";
 
 const Home = (props) => {
   const [modalShow, setModalShow] = useState(false);
   const [img, setImg] = useState(null);
   const [spaceProblem, setSpaceProblem] = useState(false);
-  const [blogs, setBlogs] = useState(null);
+  const [blogs, setBlogs] = useState([]);
   const formInputRef = useRef();
 
   const user = useSelector((state) => state.user);
@@ -113,7 +116,19 @@ const Home = (props) => {
       if (status === 403 || status === 401) {
         localStorage.clear();
       }
-      //TODO => convert data to blog
+      console.log(data);
+      const convertedData = data.map((blog) => (
+        <Blog
+          key={blog._id}
+          body={blog.body}
+          image={blog.image}
+          likes={blog.likes}
+          user={blog.user}
+          comments={blog.comments}
+          createdDate={blog.createdDate}
+        />
+      ));
+      setBlogs(convertedData);
     }
     fetchData();
   }, [user]);
@@ -135,7 +150,11 @@ const Home = (props) => {
           spaceProblem={spaceProblem}
         />
       )}
-      <div className="timeline"></div>
+      <div className="timeline">
+        <VerticalTimeline>
+          { blogs.length ? blogs : <p className="empty">There's no blogs yet</p> }
+        </VerticalTimeline>
+      </div>
     </div>
   );
 };
