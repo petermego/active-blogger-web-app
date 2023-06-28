@@ -120,6 +120,7 @@ const Home = (props) => {
       const convertedData = data.map((blog) => (
         <Blog
           key={blog._id}
+          id={blog._id}
           body={blog.body}
           image={blog.image}
           likes={blog.likes}
@@ -152,7 +153,7 @@ const Home = (props) => {
       )}
       <div className="timeline">
         <VerticalTimeline>
-          { blogs.length ? blogs : <p className="empty">There's no blogs yet</p> }
+          {blogs.length ? blogs : <p className="empty">There's no blogs yet</p>}
         </VerticalTimeline>
       </div>
     </div>

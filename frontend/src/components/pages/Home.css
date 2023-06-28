@@ -1,8 +1,22 @@
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
 .feed {
   height: 100%;
   width: 30rem;
   margin: auto;
   padding-top: 2rem;
+  overflow: auto;
 }
 
 .add-feed {
@@ -15,7 +29,7 @@
   font-weight: 700;
   font-size: large;
   width: 100%;
-  background-color: #f5c518;
+  background-color: rgb(245, 197, 24);
   height: 3rem;
   border-radius: .6rem;
   cursor: pointer;

@@ -1,3 +1,77 @@
 .blog {
   width: 100%;
+  background-color: rgb(21, 21, 21);
+  color: white;
+  margin: 10px 0px;
+}
+.blog .user-data {
+  width: max-content;
+  height: 50px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.blog .user-data .user-img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.blog .user-data p {
+  margin-left: 15px;
+}
+.blog .blog-body {
+  font-size: 25px;
+  margin: 0px 10px;
+  overflow: auto;
+}
+.blog .blog-date {
+  padding-top: 5px;
+  padding-left: 10px;
+}
+
+.blog .blog-img {
+  width: 100%;
+}
+
+.blog .blog-rate {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.blog .blog-rate div {
+  display: flex;
+  align-items: center;
+  width: 75px;
+  justify-content: space-between;
+}
+
+.blog .blog-rate .comment {
+  background-color: black;
+  padding: 10px;
+  border-radius: 15%;
+}
+
+.blog .blog-rate img.regular {
+  width: 50px;
+  height: 50px;
+  background-color: #f5c518;
+  border-radius: 50%;
+}
+
+.blog .blog-rate img.active {
+  width: 40px;
+  height: 40px;
+  background-color: #f5c518;
+  border: 10px black solid;
+  border-radius: 50%;
 }

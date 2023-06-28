@@ -75,3 +75,25 @@ export const getAllBlogs = async (clientToken) => {
     .then((res) => [res.data, res.status])
     .catch((error) => console.log(error));
 };
+
+export const addLike = async (clientToken, blogId, userId) => {
+  return await axios
+    .post(process.env.REACT_APP_ADD_LIKE, {blogId, userId}, {
+      headers: {
+        Authorization: `Bearer ${clientToken}`,
+      },
+    })
+    .then((res) => [res.data, res.status])
+    .catch((error) => console.log(error));
+};
+
+export const removeLike = async (clientToken, blogId, userId) => {
+  return await axios
+    .post(process.env.REACT_APP_REMOVE_LIKE, {blogId}, {
+      headers: {
+        Authorization: `Bearer ${clientToken}`,
+      },
+    })
+    .then((res) => [res.data, res.status])
+    .catch((error) => console.log(error));
+};
