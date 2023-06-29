@@ -10,6 +10,7 @@ const Blog = (props) => {
   const user = useSelector((state) => state.user);
   const [status, setStatus] = useState("regular");
   const [likes, setLikes] = useState(props.likes.length);
+  const [commentsDisplay, setCommentsDisplay] = useState(false);
   let month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const date = new Date(props.createdDate);
 
@@ -24,18 +25,23 @@ const Blog = (props) => {
       setStatus("regular");
     }
   };
+
   useEffect(() => {
     if (props.likes.includes(props.user._id)) {
       setStatus("active");
     }
   }, [props.user._id, props.likes])
   
+  const commentsDisplayHandler = () => {
+    setCommentsDisplay(state => !state);
+  };
   
   return (
     <VerticalTimelineElement className="blog">
       <div className="user-data">
         {props.user.imagePath ? (
           <img
+            loading='lazy'
             className="user-img"
             src={`http://localhost:8080/${props.user.imagePath}`}
             alt={props.user.firstName}
@@ -50,6 +56,7 @@ const Blog = (props) => {
       <p className="blog-body">{props.body}</p>
       {props.image ? (
         <img
+          loading='lazy'
           className="blog-img"
           src={`http://localhost:8080/${props.image}`}
           alt="blog"
@@ -60,11 +67,19 @@ const Blog = (props) => {
           <img onClick={() => likeStatus()} className={`${status}`} src="./arrow-up-solid.svg" alt="arrow up" />
           {<p>{likes}</p>}
         </div>
-        <p className='comment'>Comments</p>
+        <p className='comment' onClick={() => commentsDisplayHandler()}>Comments</p>
       </div>
       <p className="blog-date">
         {date.getDate()} {month[date.getMonth()]}
       </p>
+      {commentsDisplay ? (
+        <div className='comments'>
+          <form className='comment-form'>
+            <input type="text" />
+            <input type="submit" value="submit" />
+          </form>
+        </div>
+      ) : null}
     </VerticalTimelineElement>
   );
 }

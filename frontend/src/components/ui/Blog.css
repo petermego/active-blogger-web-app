@@ -9,8 +9,10 @@
   height: 50px;
   font-size: 20px;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 5px;
 }
 .blog .user-data .user-img {
   height: 50px;
@@ -74,4 +76,32 @@
   background-color: #f5c518;
   border: 10px black solid;
   border-radius: 50%;
+}
+
+.comments {
+  width: 100%;
+}
+
+.comments form {
+  padding: 0px 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comments input[type="text"] {
+  padding: 5px;
+  border: none;
+  outline: none;
+  color: black;
+  width:fit-content;
+}
+
+.comments input[type="submit"] {
+  width: 30px;
+  text-align: center;
+}
+
+@media (max-width:480px) {
 }
