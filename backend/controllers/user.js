@@ -36,7 +36,7 @@ exports.postBlog = async (req, res) => {
     user.blogs.push(blog);
     user.save()
       .catch(err => console.log(err));
-    return res.status(201).json({ error: false, message: "uploaded successfully!" });
+    return res.status(201).json({ error: false, message: "uploaded successfully!", blog });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: true, message: "Internal server error", error });
@@ -58,7 +58,7 @@ exports.postExperience = async (req, res) => {
     user.blogs.push(blog);
     user.save()
       .catch(err => console.log(err));
-    return res.status(201).json({ error: false, message: "uploaded successfully!" });
+    return res.status(201).json({ error: false, message: "uploaded successfully!", blog });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: true, message: "Internal server error", error });

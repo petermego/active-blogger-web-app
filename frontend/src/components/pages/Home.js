@@ -88,6 +88,20 @@ const Home = (props) => {
         top: 0,
         behavior: "smooth",
       });
+      const [data] = await getAllBlogs(user.token);
+      const convertedData = data.map((blog) => (
+        <Blog
+          key={blog._id}
+          id={blog._id}
+          body={blog.body}
+          image={blog.image}
+          likes={blog.likes}
+          user={blog.user}
+          comments={blog.comments}
+          createdDate={blog.createdDate}
+        />
+      ));
+      setBlogs(convertedData);
       return;
     }
     const blog = {
@@ -104,6 +118,20 @@ const Home = (props) => {
       top: 0,
       behavior: "smooth",
     });
+    const [data] = await getAllBlogs(user.token);
+    const convertedData = data.map((blog) => (
+      <Blog
+        key={blog._id}
+        id={blog._id}
+        body={blog.body}
+        image={blog.image}
+        likes={blog.likes}
+        user={blog.user}
+        comments={blog.comments}
+        createdDate={blog.createdDate}
+      />
+    ));
+    setBlogs(convertedData);
   };
 
   const modalFormHandler = () => {
@@ -116,7 +144,6 @@ const Home = (props) => {
       if (status === 403 || status === 401) {
         localStorage.clear();
       }
-      console.log(data);
       const convertedData = data.map((blog) => (
         <Blog
           key={blog._id}
