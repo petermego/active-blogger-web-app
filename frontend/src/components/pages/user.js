@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import UserInfo from "../ui/user-info";
@@ -28,4 +29,4 @@ const User = (props) => {
   }
 };
 
-export default User;
+export default React.memo(User);

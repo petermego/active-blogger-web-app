@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -187,4 +188,4 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+export default React.memo(Home);
